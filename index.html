@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoboGPT Documentation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+    <style>
+        body {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+        details {
+            margin-bottom: 1rem;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        code {
+            background-color: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 85%;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            padding: 16px;
+            overflow: auto;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .center {
+            text-align: center;
+        }
+        hr {
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="content" class="markdown-body">
+        <!-- Content will be loaded here via JavaScript -->
+        <h1 class="center">🤖 Loading RoboGPT Documentation...</h1>
+    </div>
+
+    <!-- Include markdown-it from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@13/dist/markdown-it.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch the README.md file
+            fetch('README.md')
+                .then(response => response.text())
+                .then(markdown => {
+                    // Initialize markdown-it
+                    const md = window.markdownit({
+                        html: true,
+                        linkify: true,
+                        typographer: true
+                    });
+                    
+                    // Render the markdown to HTML
+                    const html = md.render(markdown);
+                    
+                    // Insert the rendered HTML into the content div
+                    document.getElementById('content').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error loading README:', error);
+                    document.getElementById('content').innerHTML = `
+                        <h1>Error Loading Documentation</h1>
+                        <p>Sorry, there was an error loading the documentation. Please try again later.</p>
+                        <p>Error details: ${error.message}</p>
+                    `;
+                });
+        });
+    </script>
+</body>
+</html>
