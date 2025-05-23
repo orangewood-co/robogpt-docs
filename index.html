@@ -36,15 +36,29 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ddd;
         }
         th, td {
-            padding: 8px;
+            padding: 12px 15px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border: 1px solid #ddd;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #4a5568;
+            color: white;
             font-weight: bold;
+        }
+        /* Style for table cells with repository names */
+        td:first-child {
+            font-weight: bold;
+        }
+        /* Add zebra striping for better readability */
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        tr:hover {
+            background-color: #f1f5f9;
         }
         code {
             background-color: #f6f8fa;
@@ -75,6 +89,36 @@
         }
         hr {
             margin: 30px 0;
+        }
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #0d1117;
+                color: #c9d1d9;
+            }
+            .markdown-body {
+                color: #c9d1d9;
+                background-color: #0d1117;
+            }
+            th {
+                background-color: #30363d;
+                color: #ffffff;
+            }
+            td {
+                border-color: #30363d;
+            }
+            tr:nth-child(even) {
+                background-color: #161b22;
+            }
+            tr:hover {
+                background-color: #1f2937;
+            }
+            a {
+                color: #58a6ff;
+            }
+            code, pre {
+                background-color: #161b22;
+            }
         }
     </style>
 </head>
