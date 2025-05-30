@@ -86,6 +86,8 @@ Our next-generation system currently in active development with cutting-edge fea
 | [**Owl GUI**](https://github.com/orangewood-co/OWL_GUI.git) | Application GUI for OWl robots|
 | [**Step Guide to Use Robogpt**](https://docs.google.com/document/d/1QOW5KQF15av1xM8G3Q5ZPk_SxEDzB4RAz45goRy2vvA/edit?tab=t.0) | Step by Step Guide to use Robogpt|
 | [**V3 Docker**](https://github.com/orangewood-co/robogpt_image.git) | Docker Setup for V3|
+| [**V4 File Structure**](https://miro.com/welcomeonboard/NGhEUGxwWUlnYVIzckRpTW5hTjJVZkgwNDVWdGRFakszejhKUlZRdUt4SFhFcnE1Ui9sVXVRdTdLbXNjQU5TZFJyQUdVT1VaSVhueHFlbDJIcWRtY3NacDZJdUJDSmpPUmhZd1E5SmRoVWx5a2kzNmtScmQ0S09nVUcrVFkyMmR0R2lncW1vRmFBVnlLcVJzTmdFdlNRPT0hdjE=?share_link_id=888135151033) | File structure chart of V4 Codebase|
+
 </details>
 
 ---
