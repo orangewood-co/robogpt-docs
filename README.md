@@ -67,10 +67,10 @@ Our next-generation system currently in active development with cutting-edge fea
 
 | Repository | Description | Main Branch | Status |
 |:----------:|:------------|:----------:|:------:|
-| [**robogpt**](https://github.com/orangewood-co/robogpt.git) | Contains core packages like agents, hardware stack | `master` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() |
-| [**robogpt_tools**](https://github.com/orangewood-co/robogpt_tools.git) | Contains Applications/skills and Robot configurations | `main` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() |
-| [**robogpt_perception**](https://github.com/orangewood-co/robogpt_perception.git) | Contains Perpection packages, Vision models and Third party camera pkgs | `master` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() |
-| [**orangewood_simstack**](https://bitbucket.org/owl-dev/orangewood_simstack/src/new_worlds/) | Contains All the Simluation releated packages | `new_worlds` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
+| [**robogpt**](https://github.com/orangewood-co/robogpt.git) | Contains core packages like agents, hardware stack | `dev` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() |
+| [**robogpt_tools**](https://github.com/orangewood-co/robogpt_tools.git) | Contains Applications/skills and Robot configurations | `dev` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() |
+| [**robogpt_perception**](https://github.com/orangewood-co/robogpt_perception.git) | Contains Perpection packages, Vision models and Third party camera pkgs | `dev` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() |
+| [**orangewood_simstack**](https://bitbucket.org/owl-dev/orangewood_simstack_ros2/src/main/) | Contains All the Simluation releated packages | `main` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
 
 </details>
 
