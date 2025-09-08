@@ -90,6 +90,68 @@
         hr {
             margin: 30px 0;
         }
+        /* Header and Navigation styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        nav {
+            display: flex;
+            gap: 10px;
+        }
+        nav button {
+            background-color: transparent;
+            color: #333;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 80px;
+            text-align: center;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        nav button:hover {
+            background-color: rgba(0,0,0,0.05);
+            transform: translateY(-1px);
+        }
+        nav button.active {
+            background-color: #2563eb;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+        nav button.active:hover {
+            background-color: #1d4ed8;
+        }
+        nav button::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: transparent;
+            transition: all 0.2s ease;
+        }
+        nav button:not(.active):hover::after {
+            background-color: #2563eb;
+        }
         /* Dark mode support */
         @media (prefers-color-scheme: dark) {
             body {
@@ -119,10 +181,42 @@
             code, pre {
                 background-color: #161b22;
             }
+            header {
+                border-bottom-color: rgba(255,255,255,0.1);
+            }
+            .logo {
+                color: #f1f5f9;
+            }
+            nav button {
+                color: #f1f5f9;
+            }
+            nav button:hover {
+                background-color: rgba(255,255,255,0.05);
+            }
+            nav button.active {
+                background-color: #3b82f6;
+                box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+            }
+            nav button.active:hover {
+                background-color: #2563eb;
+            }
+            nav button:not(.active):hover::after {
+                background-color: #3b82f6;
+            }
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1 class="logo">🤖 RoboGPT</h1>
+        <nav id="navigation">
+            <button data-page="home" class="active">Home</button>
+            <button data-page="documentation">Docs</button>
+            <button data-page="features">Features</button>
+            <button data-page="team">Team</button>
+        </nav>
+    </header>
+
     <div id="content" class="markdown-body">
         <!-- Content will be loaded here via JavaScript -->
         <h1 class="center">🤖 Loading RoboGPT Documentation...</h1>
@@ -132,31 +226,84 @@
     <script src="https://cdn.jsdelivr.net/npm/markdown-it@13/dist/markdown-it.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Fetch the README.md file
-            fetch('README.md')
-                .then(response => response.text())
-                .then(markdown => {
-                    // Initialize markdown-it
-                    const md = window.markdownit({
-                        html: true,
-                        linkify: true,
-                        typographer: true
-                    });
-                    
-                    // Render the markdown to HTML
-                    const html = md.render(markdown);
-                    
-                    // Insert the rendered HTML into the content div
-                    document.getElementById('content').innerHTML = html;
-                })
-                .catch(error => {
-                    console.error('Error loading README:', error);
-                    document.getElementById('content').innerHTML = `
-                        <h1>Error Loading Documentation</h1>
-                        <p>Sorry, there was an error loading the documentation. Please try again later.</p>
-                        <p>Error details: ${error.message}</p>
-                    `;
+            // Initialize markdown-it
+            const md = window.markdownit({
+                html: true,
+                linkify: true,
+                typographer: true
+            });
+            
+            // Get the content div
+            const contentDiv = document.getElementById('content');
+            
+            // Function to load markdown content
+            function loadContent(page) {
+                // Map pages to markdown files
+                const pageMap = {
+                    'home': 'README.md',
+                    'documentation': 'documentation.md',
+                    'features': 'features.md',
+                    'team': 'team.md'
+                };
+                
+                // Get the markdown file for the current page
+                const markdownFile = pageMap[page] || 'README.md';
+                
+                // Update the active button
+                document.querySelectorAll('#navigation button').forEach(button => {
+                    button.classList.remove('active');
+                    if (button.dataset.page === page) {
+                        button.classList.add('active');
+                    }
                 });
+                
+                // Update URL hash
+                window.location.hash = page;
+                
+                // Show loading message
+                contentDiv.innerHTML = `<h1 class="center">🤖 Loading ${page.charAt(0).toUpperCase() + page.slice(1)} Content...</h1>`;
+                
+                // Fetch the markdown file
+                fetch(markdownFile)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.text();
+                    })
+                    .then(markdown => {
+                        // Render the markdown to HTML
+                        const html = md.render(markdown);
+                        
+                        // Insert the rendered HTML into the content div
+                        contentDiv.innerHTML = html;
+                    })
+                    .catch(error => {
+                        console.error(`Error loading ${markdownFile}:`, error);
+                        contentDiv.innerHTML = `
+                            <h1>Error Loading Content</h1>
+                            <p>Sorry, there was an error loading the ${page} content.</p>
+                            <p>Error details: ${error.message}</p>
+                        `;
+                    });
+            }
+            
+            // Add click event listeners to navigation buttons
+            document.querySelectorAll('#navigation button').forEach(button => {
+                button.addEventListener('click', function() {
+                    loadContent(this.dataset.page);
+                });
+            });
+            
+            // Load content based on URL hash or default to home
+            const initialPage = window.location.hash.slice(1) || 'home';
+            loadContent(initialPage);
+            
+            // Listen for hash changes
+            window.addEventListener('hashchange', function() {
+                const page = window.location.hash.slice(1) || 'home';
+                loadContent(page);
+            });
         });
     </script>
 </body>

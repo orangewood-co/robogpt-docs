@@ -14,70 +14,45 @@
 This central hub contains organized documentation for all RoboGPT versions, providing easy access to each repository's information, and development resources.
 
 RoboGPT is available in two main versions:
-- **RoboGPT v3** - Distribution-ready
-- **RoboGPT v4** - Next-generation version (currently in development)
-
----
-
-## 🚀 RoboGPT v3
-
-Our stable, production-ready version with comprehensive feature set and deployment options.
-
-### 🔬 Internal/Demo Repositories
-
-<details open>
-<summary><b>Click to expand/collapse</b></summary>
-
-| Repository | Description | Main Branch | Status |
-|:----------:|:------------|:----------:|:------:|
-| [**robogpt_v3**](https://bitbucket.org/owl-dev/robogpt_v3/src/demo/) | Core functionality for RoboGPT v3 | `demo` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
-| [**robgopt_apps**](https://bitbucket.org/owl-dev/robogpt_apps/src/demo/) | Contains Applications and Skills | `demo` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
-| [**robogpt_hardware_stack**](https://bitbucket.org/owl-dev/robogpt_hardware_stack/src/demo/) | Contains All drivers and Moveit packages | `demo` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
-| [**robot_drivers**](https://bitbucket.org/owl-dev/robot_drivers/src/demo/) | Contains the SDK and Robot drivers | `demo` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
-| [**orangewood_simstack**](https://bitbucket.org/owl-dev/orangewood_simstack/src/new_worlds/) | Contains All the Simluation releated packages | `new_worlds` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
-| [**auto_train_ros**](https://bitbucket.org/owl-dev/auto_train_ros/src/dev/) | Contain AutoTrain Ros wrapper | `dev` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
-
-</details>
-
-### 🌐 Distribution Repositories
-
-<details open>
-<summary><b>Click to expand/collapse</b></summary>
-
-| Repository | Description | Main Branch | Status |
-|:----------:|:------------|:----------:|:------:|
-| [**robogpt_core**](https://github.com/orangewood-co/robogpt_core.git) | Core functionality for RoboGPT v3 | `prod` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
-| [**robgopt_apps**](https://github.com/orangewood-co/robogpt_apps.git) | Contains Applications and Skills | `main` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
-| [**robogpt_hardware_stack**](https://github.com/orangewood-co/robogpt_hardware_stack.git) | Contains All drivers and Moveit packages | `demo` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
-| [**robot_drivers**](https://github.com/orangewood-co/robot_drivers.git) | Contains the SDK and Robot drivers | `main` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
-| [**orangewood_simstack**](https://bitbucket.org/owl-dev/orangewood_simstack/src/new_worlds/) | Contains All the Simluation releated packages | `new_worlds` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
-| [**autotrain_ros**](https://github.com/orangewood-co/autotrain_ros.git) | Contain AutoTrain Ros wrapper | `master` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
-
-</details>
-
----
-
+- **RoboGPT v3** - Dead
+- **RoboGPT v4** - Alive
 
 ## ⚡ RoboGPT v4 (Development)
 
-Our next-generation system currently in active development with cutting-edge features.
+Latest version of robogpt with all the new tech and some wow type features also known as cutting-edge features.
 
-<details open>
+<details>
 <summary><b>Click to expand/collapse</b></summary>
 
-| Repository | Description | Main Branch | Status |
-|:----------:|:------------|:----------:|:------:|
-| [**robogpt**](https://github.com/orangewood-co/robogpt.git) | Contains core packages like agents, hardware stack | `dev` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() |
-| [**robogpt_tools**](https://github.com/orangewood-co/robogpt_tools.git) | Contains Applications/skills and Robot configurations | `dev` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() |
-| [**robogpt_perception**](https://github.com/orangewood-co/robogpt_perception.git) | Contains Perpection packages, Vision models and Third party camera pkgs | `dev` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() |
-| [**orangewood_simstack**](https://bitbucket.org/owl-dev/orangewood_simstack_ros2/src/main/) | Contains All the Simluation releated packages | `main` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() |
+| Repository | Description | Main Branch | Status | Owner |
+|:----------:|:------------|:----------:|:------:|:--------:|
+| [**robogpt**](https://github.com/orangewood-co/robogpt.git) | Contains core packages like agents, hardware stack | `dev` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() | Yuvraj |
+| [**robogpt_tools**](https://github.com/orangewood-co/robogpt_tools.git) | Contains Applications/skills and Robot configurations | `dev` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() | Jiya |
+| [**robogpt_perception**](https://github.com/orangewood-co/robogpt_perception.git) | Contains Perpection packages, Vision models and Third party camera pkgs | `dev` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() | Manan |
+| [**orangewood_simstack**](https://bitbucket.org/owl-dev/orangewood_simstack_ros2/src/main/) | Contains All the Simluation releated packages | `main` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() | Rudranil |
+| [**robogpt--agentic-workflow**](https://github.com/orangewood-co/robogpt-agentic-workflow.git) | Contains code for robogpt agentic approach for prompts| `main` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() | Tushar |
+| [**prompt_validator**](https://github.com/orangewood-co/prompt_validator.git) | Contains tools for agentic workflow | `master` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() | Yuvraj |
+| [**robogpt_external_hardware**](https://github.com/orangewood-co/robogpt_external_hardware.git) | Contains packages and codebase for external hardware like PLCs, sensors etc| `main` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() | Yuvraj |
+
+</details>
+
+### Third Party Pakcages
+These should be installed along the other Robogpt v4 packages/code-base in the same folder
+
+<details>
+<summary><b>Click to expand/collapse</b></summary>
+
+| Repository | Description |
+|:----------:|:--------------------|
+| [**OrbbecROS2**](https://github.com/orbbec/OrbbecSDK_ROS2.git) | SDK/ROS2 package for orbbec camera |
+| [**pymoveit2**](https://github.com/AndrejOrsula/pymoveit2.git) | SDK for simulation/Moveit2 in python|
 
 </details>
 
 ---
 ## Additional Repositories/Links
 
-<details open>
+<details>
 <summary><b>Click to expand/collapse</b></summary>
 
 | Repository | Description |
@@ -92,25 +67,3 @@ Our next-generation system currently in active development with cutting-edge fea
 </details>
 
 ---
-
-
-## 🚦 Getting Started
-
-### Setting up Robogpt v3 Docker
-
-```bash
-# Clone this Image repository
-git clone https://github.com/orangewood-co/robogpt_image.git
-cd robogpt_image 
-git checkout v0.1-dev
-```
-**Follow the Instructions given in Image Repository**
-
----
-
-
-<div align="center">
-  
-**Made with 🤬 by the RoboGPT Team**
-
-</div>
