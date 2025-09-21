@@ -1,1 +1,0 @@
-# chutiya team... akele akele lunch kr lete, bulate bhi nhi
