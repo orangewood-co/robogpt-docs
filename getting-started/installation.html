@@ -295,21 +295,19 @@
 
         <h4>Installation Steps</h4>
         <div class="code-block">
-            # 1. Clone the main repository
-            git clone https://github.com/orangewood-co/robogpt.git
-            cd robogpt
 
-            # 2. Clone additional repositories in the same workspace
+            mkdir -p ~/orangewood_ws/src   # Don't change the workspace name
+            cd ~/orangewood_ws/src
+            git clone https://github.com/orangewood-co/robogpt.git
             git clone https://github.com/orangewood-co/robogpt_tools.git
             git clone https://github.com/orangewood-co/robogpt_perception.git
             git clone https://bitbucket.org/owl-dev/orangewood_simstack_ros2.git
             git clone https://github.com/orangewood-co/robogpt-agentic-workflow.git
             git clone https://github.com/orangewood-co/prompt_validator.git
             git clone https://github.com/orangewood-co/robogpt_external_hardware.git
-
-            # 3. Clone third-party packages
             git clone https://github.com/orbbec/OrbbecSDK_ROS2.git
             git clone https://github.com/AndrejOrsula/pymoveit2.git
+
         </div>
 
         <h3>Additional Resources</h3>
@@ -345,10 +343,9 @@
         <div class="warning">
             <strong>⚠️ Important Notes:</strong>
             <ul>
-                <li>Make sure to clone all repositories in the same workspace directory</li>
+                <li>Make sure to clone all repositories in the same workspace directory that is orangewood_ws.</li>
                 <li>Pay attention to the correct branch names (dev, main, master) for each repository</li>
                 <li>RoboGPT v4 is currently in development - expect frequent updates</li>
-                <li>Refer to the Step Guide document for detailed usage instructions</li>
             </ul>
         </div>
     </div>
