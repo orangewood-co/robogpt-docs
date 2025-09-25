@@ -364,18 +364,8 @@
     </div>
 
     <script>
-        // Dropdown functionality for sidebar
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Documentation loaded successfully');
-            
-            // Initialize sidebar dropdown functionality
-            initSidebarDropdowns();
-            
-            // Load saved collapse states from localStorage
-            loadSidebarState();
-        });
-
-        function initSidebarDropdowns() {
+        // Initialize sidebar dropdowns specifically for index page
+        function initIndexSidebar() {
             const sidebarHeaders = document.querySelectorAll('.sidebar-section h3');
             
             sidebarHeaders.forEach(header => {
@@ -391,46 +381,17 @@
                         section.classList.add('collapsed');
                         this.classList.add('collapsed');
                     }
-                    
-                    // Save state to localStorage
-                    saveSidebarState();
                 });
             });
         }
-
-        function saveSidebarState() {
-            const collapsedSections = [];
-            document.querySelectorAll('.sidebar-section.collapsed').forEach(section => {
-                const headerText = section.querySelector('h3').textContent.trim();
-                collapsedSections.push(headerText);
-            });
-            localStorage.setItem('sidebarCollapsedSections', JSON.stringify(collapsedSections));
+        
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initIndexSidebar);
+        } else {
+            initIndexSidebar();
         }
-
-        function loadSidebarState() {
-            const savedState = localStorage.getItem('sidebarCollapsedSections');
-            if (savedState) {
-                const collapsedSections = JSON.parse(savedState);
-                collapsedSections.forEach(sectionName => {
-                    const header = Array.from(document.querySelectorAll('.sidebar-section h3'))
-                        .find(h => h.textContent.trim() === sectionName);
-                    if (header) {
-                        const section = header.parentElement;
-                        section.classList.add('collapsed');
-                        header.classList.add('collapsed');
-                    }
-                });
-            }
-        }
-
-        // Expose functions globally so other pages can use them
-        window.sidebarUtils = {
-            initSidebarDropdowns,
-            saveSidebarState,
-            loadSidebarState
-        };
-    </script>
-    <script src="shared/sidebar.js"></script>
+        </script>
     <script src="shared/theme-toggle.js"></script>
 </body>
 </html>
