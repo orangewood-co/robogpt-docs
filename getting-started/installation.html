@@ -4,350 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Installation - Robogpt Documentation</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-        }
-
-        .header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .header h1 {
-            font-size: 1.8rem;
-            font-weight: 300;
-        }
-
-        .nav-breadcrumb {
-            background-color: #34495e;
-            color: white;
-            padding: 0.5rem 2rem;
-            font-size: 0.9rem;
-        }
-
-        .nav-breadcrumb a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .nav-breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
-        .main-content {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #3498db;
-        }
-
-        h3 {
-            color: #34495e;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .code-block {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 4px;
-            padding: 1rem;
-            margin: 1rem 0;
-            font-family: 'Courier New', monospace;
-            overflow-x: auto;
-            white-space: pre-line;
-            line-height: 1.4;
-        }
-
-        .warning {
-            background-color: #fff3cd;
-            border-left: 4px solid #f39c12;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-
-        .back-nav {
-            margin-bottom: 2rem;
-        }
-
-        .back-nav a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .back-nav a:hover {
-            text-decoration: underline;
-        }
-
-        .repo-table {
-            margin: 1rem 0;
-            overflow-x: auto;
-        }
-
-        .repo-table table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .repo-table th,
-        .repo-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .repo-table th {
-            background-color: #f8f9fa;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .repo-table tr:hover {
-            background-color: #f8f9fa;
-        }
-
-        .repo-table a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .repo-table a:hover {
-            text-decoration: underline;
-        }
-
-        .repo-table code {
-            background-color: #f1f3f4;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-        }
-
-        .status-development {
-            background-color: #fff3cd;
-            color: #856404;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            font-weight: 500;
-        }
-
-        .status-active {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            font-weight: 500;
-        }
-    </style>
+    <link rel="stylesheet" href="../shared/sidebar.css">
+    <link rel="stylesheet" href="../shared/page-styles.css">
+    <link rel="stylesheet" href="../shared/theme.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <div class="header">
         <h1>🚀 Robogpt Documentation</h1>
     </div>
 
-    <div class="nav-breadcrumb">
-        <a href="../index.html">Documentation</a> / <a href="overview.html">Getting Started</a> / Installation
-    </div>
+    <div class="container with-sidebar">
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h3>Getting Started</h3>
+                <ul>
+                    <li><a href="../getting-started/overview.html">Overview</a></li>
+                    <li><a href="../getting-started/installation.html">Installation</a></li>
+                    <li><a href="../getting-started/quick-start.html">Quick Start</a></li>
+                    <li><a href="../getting-started/requirements.html">Requirements</a></li>
+                </ul>
+            </div>
 
-    <div class="main-content">
+            <div class="sidebar-section">
+                <h3>Dev-Docs</h3>
+                <ul>
+                    <li><a href="../dev-docs/robogpt-agents.html" class="active">Robogpt Agents</a></li>
+                    <li><a href="../dev-docs/robogpt-perception.html">Robogpt Perception</a></li>
+                    <li><a href="../dev-docs/robogpt-tools.html">Robogpt Tools</a></li>
+                    <li><a href="../dev-docs/robogpt-nodes.html">Robogpt Nodes</a></li>
+                    <li><a href="../dev-docs/process-manager.html">Process Manager</a></li>
+                    <li><a href="../dev-docs/prompt-validator.html">Prompt Validator</a></li>
+                    <li><a href="../dev-docs/agentic-layer.html">Robogpt Agentic Layer</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Development</h3>
+                <ul>
+                    <li><a href="../development/contributing.html">Contributing</a></li>
+                    <li><a href="../development/testing.html">Testing</a></li>
+                    <li><a href="../development/troubleshooting.html">Troubleshooting</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="../resources/changelog.html">Changelog</a></li>
+                    <li><a href="../resources/faq.html">FAQ</a></li>
+                    <li><a href="../resources/support.html">Support</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="main-content">
         <div class="back-nav">
             <a href="../index.html">← Back to Main Documentation</a>
         </div>
 
-        <h2>Installation</h2>
-        <p>This comprehensive guide covers installation instructions for all RoboGPT software versions and repositories.</p>
-        
-        <div class="note">
-            <strong>Overview:</strong> RoboGPT is available in two main versions:
-            <ul>
-                <li><strong>RoboGPT v3</strong> - Dead</li>
-                <li><strong>RoboGPT v4</strong> - Alive (Latest version with cutting-edge features)</li>
-            </ul>
+        <div id="loading" class="loading">
+            Loading documentation...
         </div>
 
-        <h3>⚡ RoboGPT v4 (Development)</h3>
-        <p>Latest version of RoboGPT with all the new tech and some wow type features also known as cutting-edge features.</p>
-
-        <h4>Main Repositories</h4>
-        <div class="repo-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Repository</th>
-                        <th>Description</th>
-                        <th>Main Branch</th>
-                        <th>Status</th>
-                        <th>Owner</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><a href="https://github.com/orangewood-co/robogpt.git" target="_blank"><strong>robogpt</strong></a></td>
-                        <td>Contains core packages like agents, hardware stack</td>
-                        <td><code>dev</code></td>
-                        <td><span class="status-development">In Development</span></td>
-                        <td>Yuvraj</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/orangewood-co/robogpt_tools.git" target="_blank"><strong>robogpt_tools</strong></a></td>
-                        <td>Contains Applications/skills and Robot configurations</td>
-                        <td><code>dev</code></td>
-                        <td><span class="status-development">In Development</span></td>
-                        <td>Jiya</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/orangewood-co/robogpt_perception.git" target="_blank"><strong>robogpt_perception</strong></a></td>
-                        <td>Contains Perception packages, Vision models and Third party camera pkgs</td>
-                        <td><code>dev</code></td>
-                        <td><span class="status-development">In Development</span></td>
-                        <td>Manan</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://bitbucket.org/owl-dev/orangewood_simstack_ros2/src/main/" target="_blank"><strong>orangewood_simstack</strong></a></td>
-                        <td>Contains All the Simulation related packages</td>
-                        <td><code>main</code></td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Rudranil</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/orangewood-co/robogpt-agentic-workflow.git" target="_blank"><strong>robogpt-agentic-workflow</strong></a></td>
-                        <td>Contains code for robogpt agentic approach for prompts</td>
-                        <td><code>main</code></td>
-                        <td><span class="status-development">In Development</span></td>
-                        <td>Tushar</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/orangewood-co/prompt_validator.git" target="_blank"><strong>prompt_validator</strong></a></td>
-                        <td>Contains tools for agentic workflow</td>
-                        <td><code>master</code></td>
-                        <td><span class="status-development">In Development</span></td>
-                        <td>Yuvraj</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/orangewood-co/robogpt_external_hardware.git" target="_blank"><strong>robogpt_external_hardware</strong></a></td>
-                        <td>Contains packages and codebase for external hardware like PLCs, sensors etc</td>
-                        <td><code>main</code></td>
-                        <td><span class="status-development">In Development</span></td>
-                        <td>Yuvraj</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/orangewood-co/robogpt_node_stack.git" target="_blank"><strong>robogpt_node_stack</strong></a></td>
-                        <td>Contains packages and codebase for block programming in robogpt</td>
-                        <td><code>main</code></td>
-                        <td><span class="status-development">In Development</span></td>
-                        <td>Yuvraj</td>
-                    </tr>
-                    
-                </tbody>
-            </table>
+        <div id="error" class="error" style="display: none;">
+            <h3>Error Loading Documentation</h3>
+            <p id="error-message">Failed to load the documentation content.</p>
         </div>
 
-        <h4>Third Party Packages</h4>
-        <p>These should be installed along the other RoboGPT v4 packages/code-base in the same folder:</p>
-        <div class="repo-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Repository</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><a href="https://github.com/orbbec/OrbbecSDK_ROS2.git" target="_blank"><strong>OrbbecROS2</strong></a></td>
-                        <td>SDK/ROS2 package for orbbec camera</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/AndrejOrsula/pymoveit2.git" target="_blank"><strong>pymoveit2</strong></a></td>
-                        <td>SDK for simulation/Moveit2 in python</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h4>Installation Steps</h4>
-        <div class="code-block">
-
-            mkdir -p ~/orangewood_ws/src   # Don't change the workspace name
-            cd ~/orangewood_ws/src
-            git clone https://github.com/orangewood-co/robogpt.git
-            git clone https://github.com/orangewood-co/robogpt_tools.git
-            git clone https://github.com/orangewood-co/robogpt_perception.git
-            git clone https://bitbucket.org/owl-dev/orangewood_simstack_ros2.git
-            git clone https://github.com/orangewood-co/robogpt-agentic-workflow.git
-            git clone https://github.com/orangewood-co/prompt_validator.git
-            git clone https://github.com/orangewood-co/robogpt_external_hardware.git
-            git clone https://github.com/orbbec/OrbbecSDK_ROS2.git
-            git clone https://github.com/AndrejOrsula/pymoveit2.git
-
-        </div>
-
-        <h3>Additional Resources</h3>
-        <div class="repo-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Resource</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><a href="https://github.com/orangewood-co/owl_robot_client_SDK.git" target="_blank"><strong>Owl Robot Client</strong></a></td>
-                        <td>SDK for OWL Robots</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/orangewood-co/OWL_GUI.git" target="_blank"><strong>Owl GUI</strong></a></td>
-                        <td>Application GUI for OWL robots</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/orangewood-co/robogpt_skills_doc" target="_blank"><strong>RoboGPT Skills Guide</strong></a></td>
-                        <td>Complete info about skills in RoboGPT</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://miro.com/welcomeonboard/NGhEUGxwWUlnYVIzckRpTW5hTjJVZkgwNDVWdGRFakszejhKUlZRdUt4SFhFcnE1Ui9sVXVRdTdLbXNjQU5TZFJyQUdVT1VaSVhueHFlbDJIcWRtY3NacDZJdUJDSmpPUmhZd1E5SmRoVWx5a2kzNmtScmQ0S09nVUcrVFkyMmR0R2lncW1vRmFBVnlLcVJzTmdFdlNRPT0hdjE=" target="_blank"><strong>V4 File Structure</strong></a></td>
-                        <td>File structure chart of V4 Codebase</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="warning">
-            <strong>⚠️ Important Notes:</strong>
-            <ul>
-                <li>Make sure to clone all repositories in the same workspace directory that is orangewood_ws.</li>
-                <li>Pay attention to the correct branch names (dev, main, master) for each repository</li>
-                <li>RoboGPT v4 is currently in development - expect frequent updates</li>
-            </ul>
+        <div id="markdown-content" class="markdown-content" style="display: none;">
+            <!-- Markdown content will be rendered here -->
         </div>
     </div>
+
+    <script>
+        const MARKDOWN_FILE_PATH = './markdown/installation.md';
+
+        async function loadMarkdownContent() {
+            try {
+                const response = await fetch(MARKDOWN_FILE_PATH);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch markdown file: ${response.status} ${response.statusText}`);
+                }
+
+                const markdownText = await response.text();
+
+                marked.setOptions({
+                    breaks: true,
+                    gfm: true,
+                    headerIds: true,
+                    tables: true
+                });
+
+                const htmlContent = marked.parse(markdownText);
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'none';
+                document.getElementById('markdown-content').style.display = 'block';
+                document.getElementById('markdown-content').innerHTML = htmlContent;
+
+                const firstH1 = document.querySelector('#markdown-content h1');
+                if (firstH1) {
+                    document.title = `${firstH1.textContent} - Robogpt Documentation`;
+                }
+            } catch (error) {
+                console.error('Error loading markdown:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error-message').textContent = error.message;
+                document.getElementById('markdown-content').style.display = 'block';
+                document.getElementById('markdown-content').innerHTML = `
+                    <h1>Installation</h1>
+                    <p>Please create a markdown file at <code>${MARKDOWN_FILE_PATH}</code> to display the content.</p>
+                    <h3>Expected Content:</h3>
+                    <ul>
+                        <li>Workspace setup and prerequisites</li>
+                        <li>Repositories overview and cloning steps</li>
+                        <li>Third-party dependencies</li>
+                        <li>Build and verification</li>
+                    </ul>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadMarkdownContent);
+    </script>
+    <script src="../shared/sidebar.js"></script>
+    <script src="../shared/theme-toggle.js"></script>
 </body>
 </html>

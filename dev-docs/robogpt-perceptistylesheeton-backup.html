@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overview - Robogpt Documentation</title>
+    <title>RoboGPT Agents - Robogpt Documentation</title>
     <link rel="stylesheet" href="../shared/sidebar.css">
     <link rel="stylesheet" href="../shared/page-styles.css">
     <link rel="stylesheet" href="../shared/theme.css">
@@ -78,58 +78,64 @@
     </div>
 
     <script>
-        const MARKDOWN_FILE_PATH = './markdown/overview.md';
-
+        const MARKDOWN_FILE_PATH = './markdown/robogpt-agents.md';
+        
         async function loadMarkdownContent() {
             try {
                 const response = await fetch(MARKDOWN_FILE_PATH);
+                
                 if (!response.ok) {
                     throw new Error(`Failed to fetch markdown file: ${response.status} ${response.statusText}`);
                 }
-
+                
                 const markdownText = await response.text();
-
+                
                 marked.setOptions({
                     breaks: true,
                     gfm: true,
                     headerIds: true,
                     tables: true
                 });
-
+                
                 const htmlContent = marked.parse(markdownText);
-
+                
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('error').style.display = 'none';
                 document.getElementById('markdown-content').style.display = 'block';
                 document.getElementById('markdown-content').innerHTML = htmlContent;
-
+                
                 const firstH1 = document.querySelector('#markdown-content h1');
                 if (firstH1) {
                     document.title = `${firstH1.textContent} - Robogpt Documentation`;
                 }
+                
             } catch (error) {
                 console.error('Error loading markdown:', error);
+                
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('error').style.display = 'block';
                 document.getElementById('error-message').textContent = error.message;
+                
                 document.getElementById('markdown-content').style.display = 'block';
                 document.getElementById('markdown-content').innerHTML = `
-                    <h1>Installation</h1>
+                    <h1>RoboGPT Agents</h1>
                     <p>Please create a markdown file at <code>${MARKDOWN_FILE_PATH}</code> to display the content.</p>
                     <h3>Expected Content:</h3>
                     <ul>
-                        <li>Workspace setup and prerequisites</li>
-                        <li>Repositories overview and cloning steps</li>
-                        <li>Third-party dependencies</li>
-                        <li>Build and verification</li>
+                        <li>Agent Architecture Overview</li>
+                        <li>Core Components & API Reference</li>
+                        <li>Configuration & Usage Examples</li>
+                        <li>Troubleshooting</li>
                     </ul>
                 `;
             }
         }
-
+        
         document.addEventListener('DOMContentLoaded', loadMarkdownContent);
     </script>
     <script src="../shared/sidebar.js"></script>
     <script src="../shared/theme-toggle.js"></script>
+        </div>
+    </div>
 </body>
 </html>

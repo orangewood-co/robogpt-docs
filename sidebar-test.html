@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Sidebar Dropdown</title>
+    <link rel="stylesheet" href="shared/sidebar.css">
+    <link rel="stylesheet" href="shared/theme.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin: 0;
+        }
+
+        .test-content {
+            flex: 1;
+            padding: 2rem;
+            background-color: white;
+            margin: 20px;
+            margin-left: 300px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .test-content {
+                margin-left: 20px;
+            }
+        }
+
+        .test-info {
+            background-color: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 Robogpt Documentation - Sidebar Test</h1>
+    </div>
+
+    <div class="container with-sidebar">
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h3>Getting Started</h3>
+                <ul>
+                    <li><a href="getting-started/overview.html">Overview</a></li>
+                    <li><a href="getting-started/installation.html">Installation</a></li>
+                    <li><a href="getting-started/quick-start.html">Quick Start</a></li>
+                    <li><a href="getting-started/requirements.html">Requirements</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Dev-Docs</h3>
+                <ul>
+                    <li><a href="dev-docs/robogpt-agents.html">Robogpt Agents</a></li>
+                    <li><a href="dev-docs/robogpt-perception.html">Robogpt Perception</a></li>
+                    <li><a href="dev-docs/robogpt-tools.html">Robogpt Tools</a></li>
+                    <li><a href="dev-docs/robogpt-nodes.html">Robogpt Nodes</a></li>
+                    <li><a href="dev-docs/process-manager.html">Process Manager</a></li>
+                    <li><a href="dev-docs/prompt-validator.html">Prompt Validator</a></li>
+                    <li><a href="dev-docs/agentic-layer.html">Robogpt Agentic Layer</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Development</h3>
+                <ul>
+                    <li><a href="development/contributing.html">Contributing</a></li>
+                    <li><a href="development/testing.html">Testing</a></li>
+                    <li><a href="development/troubleshooting.html">Troubleshooting</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="resources/changelog.html">Changelog</a></li>
+                    <li><a href="resources/faq.html">FAQ</a></li>
+                    <li><a href="resources/support.html">Support</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="test-content">
+            <h2>Sidebar Dropdown Test</h2>
+            <div class="test-info">
+                <h3>Test Instructions:</h3>
+                <ol>
+                    <li>Click on any of the section headers in the sidebar (Getting Started, Dev-Docs, Development, Resources)</li>
+                    <li>The section should collapse/expand with a smooth animation</li>
+                    <li>The arrow should rotate to indicate the state</li>
+                    <li>The collapse state should be remembered when you refresh the page</li>
+                    <li>Navigate to other pages and the sidebar state should persist</li>
+                </ol>
+            </div>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li>✅ Dropdown functionality with smooth animations</li>
+                <li>✅ Persistent state using localStorage</li>
+                <li>✅ Consistent across all pages</li>
+                <li>✅ Mobile responsive</li>
+                <li>✅ Visual indicators (arrows)</li>
+            </ul>
+
+            <h3>Test Links:</h3>
+            <p>Try navigating to these pages and observe that the sidebar state is maintained:</p>
+            <ul>
+                <li><a href="index.html">Home Page</a></li>
+                <li><a href="dev-docs/robogpt-agents.html">RoboGPT Agents</a></li>
+                <li><a href="dev-docs/robogpt-perception.html">RoboGPT Perception</a></li>
+                <li><a href="dev-docs/robogpt-tools.html">RoboGPT Tools</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="shared/sidebar.js"></script>
+    <script src="shared/theme-toggle.js"></script>
+</body>
+</html>

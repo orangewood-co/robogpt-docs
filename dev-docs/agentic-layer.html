@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overview - Robogpt Documentation</title>
+    <title>RoboGPT Agentic Layer - Robogpt Documentation</title>
     <link rel="stylesheet" href="../shared/sidebar.css">
     <link rel="stylesheet" href="../shared/page-styles.css">
     <link rel="stylesheet" href="../shared/theme.css">
@@ -59,74 +59,65 @@
         </div>
 
         <div class="main-content">
-        <div class="back-nav">
-            <a href="../index.html">← Back to Main Documentation</a>
-        </div>
+            <div class="back-nav">
+                <a href="../index.html">← Back to Main Documentation</a>
+            </div>
 
-        <div id="loading" class="loading">
-            Loading documentation...
-        </div>
+            <div id="loading" class="loading">
+                Loading documentation...
+            </div>
 
-        <div id="error" class="error" style="display: none;">
-            <h3>Error Loading Documentation</h3>
-            <p id="error-message">Failed to load the documentation content.</p>
-        </div>
+            <div id="error" class="error" style="display: none;">
+                <h3>Error Loading Documentation</h3>
+                <p id="error-message">Failed to load the documentation content.</p>
+            </div>
 
-        <div id="markdown-content" class="markdown-content" style="display: none;">
-            <!-- Markdown content will be rendered here -->
+            <div id="markdown-content" class="markdown-content" style="display: none;">
+                <!-- Markdown content will be rendered here -->
+            </div>
         </div>
     </div>
 
     <script>
-        const MARKDOWN_FILE_PATH = './markdown/overview.md';
-
+        const MARKDOWN_FILE_PATH = './markdown/agentic-layer.md';
+        
         async function loadMarkdownContent() {
             try {
                 const response = await fetch(MARKDOWN_FILE_PATH);
+                
                 if (!response.ok) {
-                    throw new Error(`Failed to fetch markdown file: ${response.status} ${response.statusText}`);
+                    throw new Error('Markdown file not found');
                 }
-
+                
                 const markdownText = await response.text();
-
-                marked.setOptions({
-                    breaks: true,
-                    gfm: true,
-                    headerIds: true,
-                    tables: true
-                });
-
                 const htmlContent = marked.parse(markdownText);
-
+                
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('error').style.display = 'none';
-                document.getElementById('markdown-content').style.display = 'block';
                 document.getElementById('markdown-content').innerHTML = htmlContent;
-
-                const firstH1 = document.querySelector('#markdown-content h1');
-                if (firstH1) {
-                    document.title = `${firstH1.textContent} - Robogpt Documentation`;
-                }
+                document.getElementById('markdown-content').style.display = 'block';
+                
             } catch (error) {
                 console.error('Error loading markdown:', error);
+                
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('error').style.display = 'block';
                 document.getElementById('error-message').textContent = error.message;
+                
                 document.getElementById('markdown-content').style.display = 'block';
                 document.getElementById('markdown-content').innerHTML = `
-                    <h1>Installation</h1>
+                    <h1>RoboGPT Agentic Layer - Robogpt Documentation</h1>
                     <p>Please create a markdown file at <code>${MARKDOWN_FILE_PATH}</code> to display the content.</p>
                     <h3>Expected Content:</h3>
                     <ul>
-                        <li>Workspace setup and prerequisites</li>
-                        <li>Repositories overview and cloning steps</li>
-                        <li>Third-party dependencies</li>
-                        <li>Build and verification</li>
+                        <li>Component Architecture Overview</li>
+                        <li>Core API Reference</li>
+                        <li>Configuration & Usage Examples</li>
+                        <li>Troubleshooting</li>
                     </ul>
                 `;
             }
         }
-
+        
         document.addEventListener('DOMContentLoaded', loadMarkdownContent);
     </script>
     <script src="../shared/sidebar.js"></script>

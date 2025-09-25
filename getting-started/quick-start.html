@@ -4,133 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quick Start - Robogpt Documentation</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-        }
-
-        .header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .header h1 {
-            font-size: 1.8rem;
-            font-weight: 300;
-        }
-
-        .nav-breadcrumb {
-            background-color: #34495e;
-            color: white;
-            padding: 0.5rem 2rem;
-            font-size: 0.9rem;
-        }
-
-        .nav-breadcrumb a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .nav-breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
-        .main-content {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #3498db;
-        }
-
-        h3 {
-            color: #34495e;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .code-block {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 4px;
-            padding: 1rem;
-            margin: 1rem 0;
-            font-family: 'Courier New', monospace;
-            overflow-x: auto;
-        }
-
-        .back-nav {
-            margin-bottom: 2rem;
-        }
-
-        .back-nav a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .back-nav a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="../shared/sidebar.css">
+    <link rel="stylesheet" href="../shared/page-styles.css">
+    <link rel="stylesheet" href="../shared/theme.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <div class="header">
         <h1>🚀 Robogpt Documentation</h1>
     </div>
 
-    <div class="nav-breadcrumb">
-        <a href="../index.html">Documentation</a> / <a href="overview.html">Getting Started</a> / Quick Start
-    </div>
+    <div class="container with-sidebar">
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h3>Getting Started</h3>
+                <ul>
+                    <li><a href="../getting-started/overview.html">Overview</a></li>
+                    <li><a href="../getting-started/installation.html">Installation</a></li>
+                    <li><a href="../getting-started/quick-start.html">Quick Start</a></li>
+                    <li><a href="../getting-started/requirements.html">Requirements</a></li>
+                </ul>
+            </div>
 
-    <div class="main-content">
+            <div class="sidebar-section">
+                <h3>Dev-Docs</h3>
+                <ul>
+                    <li><a href="../dev-docs/robogpt-agents.html" class="active">Robogpt Agents</a></li>
+                    <li><a href="../dev-docs/robogpt-perception.html">Robogpt Perception</a></li>
+                    <li><a href="../dev-docs/robogpt-tools.html">Robogpt Tools</a></li>
+                    <li><a href="../dev-docs/robogpt-nodes.html">Robogpt Nodes</a></li>
+                    <li><a href="../dev-docs/process-manager.html">Process Manager</a></li>
+                    <li><a href="../dev-docs/prompt-validator.html">Prompt Validator</a></li>
+                    <li><a href="../dev-docs/agentic-layer.html">Robogpt Agentic Layer</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Development</h3>
+                <ul>
+                    <li><a href="../development/contributing.html">Contributing</a></li>
+                    <li><a href="../development/testing.html">Testing</a></li>
+                    <li><a href="../development/troubleshooting.html">Troubleshooting</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="../resources/changelog.html">Changelog</a></li>
+                    <li><a href="../resources/faq.html">FAQ</a></li>
+                    <li><a href="../resources/support.html">Support</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="main-content">
         <div class="back-nav">
             <a href="../index.html">← Back to Main Documentation</a>
         </div>
 
-        <h2>Quick Start</h2>
-        <p>Get up and running in just a few minutes with this quick start guide.</p>
-
-        <h3>Basic Usage</h3>
-        <div class="code-block">
-            import your_package
-
-            # Initialize the main class
-            client = your_package.Client()
-            
-            # Perform basic operations
-            result = client.do_something()
-            print(result)
+        <div id="loading" class="loading">
+            Loading documentation...
         </div>
 
-        <h3>Your First Example</h3>
-        <p>Here's a simple example to demonstrate the basic functionality:</p>
-        <div class="code-block">
-            # Example code here
-            def hello_world():
-                return "Hello, World!"
-            
-            print(hello_world())
+        <div id="error" class="error" style="display: none;">
+            <h3>Error Loading Documentation</h3>
+            <p id="error-message">Failed to load the documentation content.</p>
+        </div>
+
+        <div id="markdown-content" class="markdown-content" style="display: none;">
+            <!-- Markdown content will be rendered here -->
         </div>
     </div>
+
+    <script>
+        const MARKDOWN_FILE_PATH = './markdown/quick-start.md';
+
+        async function loadMarkdownContent() {
+            try {
+                const response = await fetch(MARKDOWN_FILE_PATH);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch markdown file: ${response.status} ${response.statusText}`);
+                }
+
+                const markdownText = await response.text();
+
+                marked.setOptions({
+                    breaks: true,
+                    gfm: true,
+                    headerIds: true,
+                    tables: true
+                });
+
+                const htmlContent = marked.parse(markdownText);
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'none';
+                document.getElementById('markdown-content').style.display = 'block';
+                document.getElementById('markdown-content').innerHTML = htmlContent;
+
+                const firstH1 = document.querySelector('#markdown-content h1');
+                if (firstH1) {
+                    document.title = `${firstH1.textContent} - Robogpt Documentation`;
+                }
+            } catch (error) {
+                console.error('Error loading markdown:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error-message').textContent = error.message;
+                document.getElementById('markdown-content').style.display = 'block';
+                document.getElementById('markdown-content').innerHTML = `
+                    <h1>Installation</h1>
+                    <p>Please create a markdown file at <code>${MARKDOWN_FILE_PATH}</code> to display the content.</p>
+                    <h3>Expected Content:</h3>
+                    <ul>
+                        <li>Workspace setup and prerequisites</li>
+                        <li>Repositories overview and cloning steps</li>
+                        <li>Third-party dependencies</li>
+                        <li>Build and verification</li>
+                    </ul>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadMarkdownContent);
+    </script>
+    <script src="../shared/sidebar.js"></script>
+    <script src="../shared/theme-toggle.js"></script>
 </body>
 </html>

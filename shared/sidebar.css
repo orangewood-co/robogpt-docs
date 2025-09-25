@@ -1,0 +1,122 @@
+/* Shared Sidebar Styles for RoboGPT Documentation */
+/* This CSS provides consistent styling for sidebar across all pages */
+
+.sidebar {
+    width: 280px;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    overflow-y: auto;
+    box-shadow: 2px 0 4px var(--shadow-color);
+}
+
+.sidebar-section {
+    margin-bottom: 0;
+}
+
+.sidebar-section h3 {
+    background-color: var(--sidebar-section-bg);
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--sidebar-border);
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar-section h3:hover {
+    background-color: var(--sidebar-hover-bg);
+}
+
+.sidebar-section h3::after {
+    content: '▼';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    transition: transform 0.2s ease;
+}
+
+.sidebar-section h3.collapsed::after {
+    transform: translateY(-50%) rotate(-90deg);
+}
+
+.sidebar-section ul {
+    list-style: none;
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.sidebar-section.collapsed ul {
+    max-height: 0;
+}
+
+.sidebar-section li {
+    border-bottom: 1px solid var(--sidebar-border);
+}
+
+.sidebar-section li:last-child {
+    border-bottom: none;
+}
+
+.sidebar-section a {
+    display: block;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    padding: 12px 20px;
+    transition: all 0.2s ease;
+}
+
+.sidebar-section a:hover {
+    background-color: var(--sidebar-link-hover);
+    color: var(--sidebar-text);
+}
+
+.sidebar-section a.active {
+    background-color: var(--sidebar-link-hover);
+    color: var(--sidebar-text);
+    font-weight: 500;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+    }
+}
+
+/* Container styles to support sidebar */
+.container {
+    display: flex;
+    min-height: calc(100vh - 70px);
+}
+
+.container.with-sidebar .sidebar {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    height: calc(100vh - 70px);
+    z-index: 1000;
+}
+
+.container.with-sidebar .main-content {
+    margin-left: 280px;
+    width: calc(100% - 280px);
+}
+
+@media (max-width: 768px) {
+    .container.with-sidebar .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+    
+    .container.with-sidebar .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
