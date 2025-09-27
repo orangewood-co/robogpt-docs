@@ -26,7 +26,9 @@ robogpt/
 │  └─ setup/
 └─ hardware_stack/
      ├─ hardware_description/
-     └─ hardware_drivers/
+     ├─ hardware_drivers/
+     └─ hardware_bringup/
+
 ```
 
 ---
@@ -48,32 +50,95 @@ robogpt/
 
 ## 2) Run commands and arguments
 
-### 2.1 Start the RoboGPT Agent
+### 2.1 Start the RoboGPT Agent (stand‑alone)
 
+`run_agent.launch.py` now treats `use_case` as a STRING_ARRAY parameter (ROS2 list). Pass a JSON‑like list literal (quoted because of shell) OR rely on the default `["base"]`.
+
+Example (single use case):
 ```bash
 ros2 launch robogpt_agents run_agent.launch.py \
-    use_case:=base \
-    robot_name:=owl65 \
+    use_case='["base"]' \
+    robot_name:=ec63 \
     use_sim:=false \
     robot_ip:=192.168.1.200 \
     planner_type:=internal
 ```
 
-Arguments (from run_agent.launch.py)
+Example (multiple overlays):
+```bash
+ros2 launch robogpt_agents run_agent.launch.py \
+    use_case='["base","machine_tending"]' robot_name:=owl68
+```
+
+Arguments (from `run_agent.launch.py` – current code snapshot)
 
 | Name | Type | Default | Description |
-|---|---|---|---|
-| use_case | string | base | Use case that selects tool set overlay (e.g., base, demo, custom) |
-| reload_tools | bool | false | If true, forces re-discovery of tools |
-| robot_name | string | owl65 | Robot to target for tasks (model name) |
-| use_sim | bool | false | Run in simulation instead of a physical robot |
-| robot_ip | string | 192.168.1.200 | IP address of the robot controller |
-| planner_type | string | internal | Motion planner selection (internal, moveit, etc.) |
+|------|------|---------|-------------|
+| use_case | string[] | ["base"] | Tool overlay(s) to load; list enables layered capability sets |
+| reload_tools | bool | false | Force re-discovery of tools on startup |
+| robot_name | string | ec63 | Target robot model/name (passed through to tools & topics) |
+| use_sim | bool | false | Simulation mode toggle |
+| robot_ip | string | 192.168.1.200 | Controller IP (ignored if fully simulated) |
+| planner_type | string | internal | Motion planner selection (internal, moveit, external) |
 
 Notes
-- The RobogptAgentNode declares the same parameters; keep defaults consistent between code and the launch file
+- Internally the node (`agent_node.py`) currently declares defaults: `use_case: ["machine_tending"]`, `robot_name: owl68`, `use_sim: true`. Launch files override these; keep alignment if editing.
+- Always pass list syntax for `use_case` to avoid `InvalidParameterTypeException`.
 
-### 2.2 Useful hardware stack commands (optional)
+### 2.2 Integrated Bring‑Up (robot + agent + vision)
+
+The consolidated launcher `robogpt_startup/launch/robogpt_bringup.launch.py` orchestrates:
+
+1. Agent stack (`run_agent.launch.py`) – after 1s
+2. Hardware bringup (`hardware_bringup.launch.py`) – after 5s (hardware mode only)
+3. Block programming nodes (`block_programming`) – after 10s
+4. Vision stack (`vision_bringup.launch.py`) – after 15s (if enabled)
+5. Support nodes: `prompt_validator` tool tester + `robot_status_publisher` (hardware only)
+
+Usage (hardware mode):
+```bash
+ros2 launch robogpt_startup robogpt_bringup.launch.py \
+    robot_name:=ec63 \
+    use_sim:=false \
+    robot_ip:=192.168.1.200 \
+    use_case='["base"]' \
+    enable_vision:=true \
+    planner_type:=internal \
+    add_camera:=true add_gripper:=true start_rviz:=true
+```
+
+Simulation (skips hardware_bringup, still launches agent & optional vision):
+```bash
+ros2 launch robogpt_startup robogpt_bringup.launch.py \
+    use_sim:=true robot_name:=ec63 use_case='["base"]'
+```
+
+Key additional arguments exposed by `robogpt_bringup.launch.py` and forwarded to `hardware_bringup.launch.py` (hardware only):
+
+| Argument | Default | Purpose |
+|----------|---------|---------|
+| add_camera | true | Append camera XACRO elements |
+| camera_model | d415 | Camera type (d415, d435, gemini336, etc.) |
+| add_gripper | true | Include gripper description / driver |
+| gripper_model | robotiq | Gripper model selector |
+| add_holder | true | Add accessory holder link |
+| holder_model | cam | Holder model (e.g., camera_holder) |
+| gripper_parent | flan | Parent link for attaching the gripper |
+| cams | one | Number of cameras (one, two) |
+| cam_name | camera | Base camera namespace |
+| auto_connect | True | Auto-connect Elite driver |
+| use_fake | False | Fake driver mode (diagnostics) |
+| timer_period | 0.01 | Elite driver control loop period (s) |
+| sampling_freq | 250 | OWL driver sampling frequency (Hz) |
+| max_vel | 0.87 | OWL driver max velocity (normalized) |
+| moveit_delay | 3.0 | Delay before MoveIt bringup (driver warm-up) |
+| start_rviz | true | Start RViz alongside hardware description |
+| planner_type | internal | Propagated to agents & motion layer |
+| enable_vision | true | Gate for launching vision stack |
+
+Behind the scenes, `hardware_bringup.launch.py` conditionally launches internal vs MoveIt flows based on `planner_type` (internal/moveit) and sets up robot description, state publishers, and drivers.
+
+### 2.3 Useful hardware stack commands (stand‑alone debugging)
 
 These live under hardware_stack and are useful while developing/testing:
 
@@ -168,39 +233,34 @@ Maintainers: Orangewood Robotics Team
 
 ---
 
-# Appendix A — robogpt_startup (bring-up)
+# Appendix A — Updated Bring-Up Architecture
 
-The package `core_stack/robogpt_startup` orchestrates a full bring-up: agents, vision, and robot (hardware vs simulation).
+`core_stack/robogpt_startup` now centers around `robogpt_bringup.launch.py` for end‑to‑end orchestration. The older `startup.launch.py` remains but uses the legacy `robot_spawn` path; prefer `robogpt_bringup.launch.py` moving forward.
 
-Key launchers
-- `startup.launch.py` (Python): master bring-up launcher
-- `robogpt_bringup.launch.py`, `robogpt_startup.launch.xml` (additional entry points)
+Bring-up timeline (hardware mode):
+```
+ t+1s  -> Agent (run_agent.launch.py)
+ t+5s  -> Hardware (hardware_bringup.launch.py)
+ t+10s -> Block programming nodes
+ t+15s -> Vision bringup (if enable_vision)
+```
 
-Main launcher: startup.launch.py
+Parameter categories:
+- Core: use_case (array), robot_name, use_sim, robot_ip, planner_type
+- Hardware description: add_camera, camera_model, add_gripper, gripper_model, add_holder, holder_model, gripper_parent, cams, cam_name
+- Drivers & timing: auto_connect, use_fake, timer_period, sampling_freq, max_vel, moveit_delay
+- UX / tooling: start_rviz, enable_vision
 
-Arguments
-
-| Name | Type | Default | Description |
-|---|---|---|---|
-| use_case | string | base | Use case for the RoboGPT agent |
-| reload_tools | bool | false | Force re-discovery of tools |
-| robot_name | string | owl65 | Target robot model/name |
-| use_sim | bool | false | Simulation mode (true) vs hardware (false) |
-| robot_ip | string | 192.168.1.200 | Robot controller IP (hardware mode) |
-| vision_sim | string | off | Vision simulation mode (on/off) |
-
-What it launches
-- RoboGPT Agents: includes `robogpt_agents/launch/run_agent.launch.py` with the above arguments
-- Vision system: includes `robogpt_perception/launch/vision_bringup.launch.py` (no args inferred from code)
-- Robot: conditionally includes `bot_description/launch/robot_spawn.launch.py`
-    - If `use_sim:=true`: passes `use_js_pub:=true`, `rviz:=true`, `use_sim:=true`
-    - Else hardware: `use_js_pub:=false`, `rviz:=false`, `use_sim:=false`
-
-Example
-
+Example (minimal simulation):
 ```bash
-ros2 launch robogpt_startup startup.launch.py \
-    use_case:=base robot_name:=owl65 use_sim:=true vision_sim:=on
+ros2 launch robogpt_startup robogpt_bringup.launch.py use_sim:=true robot_name:=ec63 use_case='["base"]'
+```
+Example (full hardware + MoveIt planner):
+```bash
+ros2 launch robogpt_startup robogpt_bringup.launch.py \
+    use_sim:=false robot_name:=owl68 robot_ip:=192.168.1.200 \
+    planner_type:=moveit add_camera:=true add_gripper:=true \
+    use_case='["base","machine_tending"]' start_rviz:=true
 ```
 
 ---
@@ -533,3 +593,90 @@ ros2 run bot_description ec_joints_pub.py
 
 Notes
 - The node reads the robot IP from the `robogpt_agent` parameter server; ensure the agent is running and has `robot_ip` set.
+
+--- 
+# Appendix D — hardware_bringup.launch.py (robot + planner layer)
+
+`hardware_stack/hardware_bringup/launch/hardware_bringup.launch.py` is the unified launcher the higher‑level bring-up now calls (instead of directly invoking `robot_spawn` or per‑driver bringups). It selects between two major pathways based on `planner_type`:
+
+1. Internal planning (`planner_type:=internal`)
+     - Includes `bot_description/launch/robot_spawn.launch.py` with description‑related arguments.
+     - Publishes robot state using chosen joints publisher (`use_js_pub`) and description stack only (no MoveIt pipeline).
+
+2. MoveIt pipeline (`planner_type:=moveit`)
+     - OWL robots (`robot_name` starts with `owl`):
+             - Starts `owl_moveit2_driver.py` node (real driver) with sampling & velocity parameters.
+             - After a configurable delay (`moveit_delay`), launches `owl_moveit/launch/owl_moveit.launch.py`.
+     - Elite robots (`robot_name` starts with `ec`):
+             - Includes `elite_arm_driver/launch/bringup.launch.py` (driver with connection options).
+             - After `moveit_delay`, launches `elite_moveit/launch/elite_moveit.launch.py`.
+
+If an unknown `planner_type` is provided, nothing is launched for the robot and a console warning is printed.
+
+## D.1 Parameters
+
+| Name | Default | Applies To | Description |
+|------|---------|------------|-------------|
+| planner_type | internal | all | Planner selection: `internal` or `moveit` |
+| robot_ip | 192.168.1.200 | drivers | Controller IP (driver TCP) |
+| robot_name | ec63 | all | Model selection (ec63, ec64, ec612, ec66, owl68, owl65, etc.) |
+| start_rviz | true | internal (future) | Option to auto-start RViz (not yet wired in MoveIt pathway) |
+| add_camera | true | description | Append camera elements to URDF/XACRO |
+| camera_model | d415 | description | Camera type (d415, d435, gemini variants) |
+| add_gripper | false | description | Add gripper macro & joints |
+| gripper_model | robotiq | description | Gripper type identifier |
+| add_holder | true | description | Add accessory holder link |
+| holder_model | camera_holder | description | Holder macro name |
+| gripper_parent | flan | description | Parent link for gripper attachment |
+| cams | one | description | Number of cameras (one, two) |
+| cam_name | camera | description | Base camera TF / namespace prefix |
+| use_js_pub | false | internal | Use `joint_state_publisher_gui` (true) vs default publisher (false) |
+| auto_connect | True | elite moveit | Auto-connect Elite driver on start |
+| use_fake | False | elite moveit | Fake driver mode for bench testing |
+| timer_period | 0.01 | elite moveit | Control loop period (s) |
+| sampling_freq | 250 | owl moveit | OWL driver sampling frequency (Hz) |
+| max_vel | 0.87 | owl moveit | OWL driver max velocity scaling |
+| moveit_delay | 3.0 | moveit | Delay before launching MoveIt to let driver initialize |
+
+## D.2 Typical invocations
+
+Internal planner (no MoveIt):
+```bash
+ros2 launch hardware_bringup hardware_bringup.launch.py \
+    planner_type:=internal robot_name:=ec63 add_camera:=true add_gripper:=true
+```
+
+MoveIt (Elite arm):
+```bash
+ros2 launch hardware_bringup hardware_bringup.launch.py \
+    planner_type:=moveit robot_name:=ec66 robot_ip:=192.168.1.200 \
+    auto_connect:=True add_camera:=true add_holder:=true moveit_delay:=5.0
+```
+
+MoveIt (OWL robot):
+```bash
+ros2 launch hardware_bringup hardware_bringup.launch.py \
+    planner_type:=moveit robot_name:=owl68 robot_ip:=192.168.1.200 \
+    sampling_freq:=250 max_vel:=0.9 moveit_delay:=4.0 add_camera:=true
+```
+
+## D.3 How delays & conditional logic work
+
+The launch file uses an `OpaqueFunction` to inspect `planner_type` at runtime. For MoveIt flows it inserts driver nodes (or driver bringups) and wraps the MoveIt launch include in a `TimerAction` with `period=moveit_delay`. This ensures controllers are active before MoveIt tries to load controllers/trajectories.
+
+## D.4 Integration with robogpt_bringup
+
+`robogpt_bringup.launch.py` forwards all relevant hardware parameters directly. If you add a new parameter to `hardware_bringup.launch.py`, mirror it in `robogpt_bringup.launch.py` (DeclareLaunchArgument + pass through in `launch_arguments`). Otherwise users invoking the higher-level bring-up cannot override it.
+
+## D.5 Troubleshooting
+
+| Symptom | Possible Cause | Action |
+|---------|----------------|--------|
+| No robot spawned (internal) | Wrong planner_type spelling | Use `internal` exactly |
+| MoveIt never starts | `moveit_delay` too large or driver crashed | Reduce delay, check driver logs |
+| TF frames missing for camera | `add_camera:=false` or wrong `cam_name` | Re-launch with correct flags |
+| Gripper links absent | `add_gripper:=false` | Relaunch with `add_gripper:=true` |
+| Elite driver fails to connect | IP mismatch / network | Ping controller, verify `robot_ip` |
+| OWL motion slow | `max_vel` too low | Increase cautiously (<=1.0) |
+
+---

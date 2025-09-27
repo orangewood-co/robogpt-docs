@@ -37,9 +37,9 @@ cd ~/orangewood_ws/src
 
 ```bash
 # Core RoboGPT v4 repositories
-git clone -b dev https://github.com/orangewood-co/robogpt.git
-git clone -b dev https://github.com/orangewood-co/robogpt_tools.git
-git clone -b dev https://github.com/orangewood-co/robogpt_perception.git
+git clone -b main https://github.com/orangewood-co/robogpt.git
+git clone -b main https://github.com/orangewood-co/robogpt_tools.git
+git clone -b main https://github.com/orangewood-co/robogpt_perception.git
 git clone -b main https://bitbucket.org/owl-dev/orangewood_simstack_ros2.git orangewood_simstack
 git clone -b main https://github.com/orangewood-co/robogpt-agentic-workflow.git
 git clone -b master https://github.com/orangewood-co/prompt_validator.git
@@ -97,7 +97,7 @@ Steps to setup ngrok
 
         5. Go to Domains on Top left. You will see a Table with ID and Domain ending with '.ngrok-free.app'. Copy that domain
 
-        6. echo "export NGROK_URL=your_url_here" >> ~/.bashrc
+        6. Run this command -> echo "export NGROK_URL=your_url_here" >> ~/.bashrc
 
 
 ### Method 2: Automated Installation
@@ -132,9 +132,9 @@ Latest version of robogpt with all the new tech and some wow type features also 
 
 | Repository | Description | Main Branch | Status | Owner |
 |:----------:|:------------|:----------:|:------:|:--------:|
-| [**robogpt**](https://github.com/orangewood-co/robogpt.git) | Contains core packages like agents, hardware stack | `dev` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() | Yuvraj |
-| [**robogpt_tools**](https://github.com/orangewood-co/robogpt_tools.git) | Contains Applications/skills and Robot configurations | `dev` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() | Jiya |
-| [**robogpt_perception**](https://github.com/orangewood-co/robogpt_perception.git) | Contains Perpection packages, Vision models and Third party camera pkgs | `dev` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() | Manan |
+| [**robogpt**](https://github.com/orangewood-co/robogpt.git) | Contains core packages like agents, hardware stack | `main` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() | Yuvraj |
+| [**robogpt_tools**](https://github.com/orangewood-co/robogpt_tools.git) | Contains Applications/skills and Robot configurations | `main` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() | Jiya |
+| [**robogpt_perception**](https://github.com/orangewood-co/robogpt_perception.git) | Contains Perpection packages, Vision models and Third party camera pkgs | `main` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() | Manan |
 | [**orangewood_simstack**](https://bitbucket.org/owl-dev/orangewood_simstack_ros2/src/main/) | Contains All the Simluation releated packages | `main` | [![Status](https://img.shields.io/badge/status-active-success.svg)]() | Rudranil |
 | [**robogpt--agentic-workflow**](https://github.com/orangewood-co/robogpt-agentic-workflow.git) | Contains code for robogpt agentic approach for prompts| `main` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() | Tushar |
 | [**prompt_validator**](https://github.com/orangewood-co/prompt_validator.git) | Contains tools for agentic workflow | `master` | [![Status](https://img.shields.io/badge/status-in_development-yellow.svg)]() | Yuvraj |
