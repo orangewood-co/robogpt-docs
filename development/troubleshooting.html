@@ -55,14 +55,62 @@
                 <a href="../index.html">← Back to Main Documentation</a>
             </div>
 
-            <h2>Troubleshooting</h2>
-            <p>Content for Troubleshooting will be added here.</p>
-            
-            <div class="note">
-                <strong>Note:</strong> This page is under development. Content will be added soon.
+            <div id="loading" class="loading">
+                Loading documentation...
+            </div>
+
+            <div id="error" class="error" style="display: none;">
+                <h3>Error Loading Documentation</h3>
+                <p id="error-message">Failed to load the documentation content.</p>
+            </div>
+
+            <div id="markdown-content" class="markdown-content" style="display: none;">
+                <!-- Markdown content will be rendered here -->
             </div>
         </div>
     </div>
+    <script>
+        const MARKDOWN_FILE_PATH = './markdown/troubleshooting.md';
+        
+        async function loadMarkdownContent() {
+            try {
+                const response = await fetch(MARKDOWN_FILE_PATH);
+                
+                if (!response.ok) {
+                    throw new Error('Markdown file not found');
+                }
+                
+                const markdownText = await response.text();
+                const htmlContent = marked.parse(markdownText);
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('markdown-content').innerHTML = htmlContent;
+                document.getElementById('markdown-content').style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading markdown:', error);
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error-message').textContent = error.message;
+                
+                document.getElementById('markdown-content').style.display = 'block';
+                document.getElementById('markdown-content').innerHTML = `
+                    <h1>RoboGPT Agentic Layer - Robogpt Documentation</h1>
+                    <p>Please create a markdown file at <code>${MARKDOWN_FILE_PATH}</code> to display the content.</p>
+                    <h3>Expected Content:</h3>
+                    <ul>
+                        <li>Component Architecture Overview</li>
+                        <li>Core API Reference</li>
+                        <li>Configuration & Usage Examples</li>
+                        <li>Troubleshooting</li>
+                    </ul>
+                `;
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', loadMarkdownContent);
+    </script>
 
     <script src="../shared/sidebar.js"></script>
     <script src="../shared/theme-toggle.js"></script>
