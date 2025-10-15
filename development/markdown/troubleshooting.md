@@ -136,16 +136,36 @@ What to capture for escalation:
 Purpose: Tool definitions/implementations discoverable by the agent runtime and invoked by the model.
 
 Symptoms (examples):
-- Gripper tool not working on prompts
-- Error in execution of simple move commands, saving pose commands
 
 Quick checks:
-- check -- if gripper is connected -- Robotiq gripper node is live -- 
-- test running gripper open service from terminal 
-- Do a sudo chmod 777 /dev/ttyUSB0 and re-run gripper node via webapp 
-- Error in moveing robot - check if tools are loaded (check terminal logs) 
-- check sdk issue if any args is missing
-- In sim try moving robot via moveit - rviz if moves then check run wrapper tests
+
+
+## Troubleshooting FAQs (team‑reported)
+
+### Invalid robot number after reload or startup
+- Why it happens: Robot wrappers didn’t load correctly. Either the robot isn’t reachable, or in simulation the Move Group wasn’t ready when wrappers initialized.
+- Quick checks:
+  - Ping robot IP; verify robot controller state if using hardware.
+  - If in sim, confirm MoveIt and the correct planning group are up before starting agents.
+  - Tail agent logs for “Robot Loaded” and wrapper init messages.
+- Quick fix:
+  - Restart the agents to force wrapper re‑load.
+  - In sim flows, start MoveIt first, then agents.
+
+### Can’t reload skills
+- Why it happens: The Agent node can die due to a multithreading race during reload.
+- Quick checks: Ensure the agent process is still alive; check master.log around reload.
+- Quick fix: Restart the Agent node. (Long‑term: stabilize reload path.)
+
+### Robot moves to a random pose (logs show correct target)
+- Why it happens: Planner configuration mismatch; wrong planner ID or motion type.
+- Quick checks: Inspect planner_id and motion type; verify target frame and transforms.
+- Quick fix: Switch to pilz with LIN for straight‑line motions; re‑plan and execute.
+
+### RoboGPT says it can’t find the tool to execute
+- Why it happens: The model couldn’t infer the intended tool from the prompt.
+- Quick checks: Confirm tools are loaded (log has “Loaded X tools”); list tool names in logs.
+- Quick fix: Rewrite the prompt to explicitly state the task, object, and expected outcome (e.g., “use robotiq_gripper to open” or “move_to_pose to <pose_name>”).
 
 
 
