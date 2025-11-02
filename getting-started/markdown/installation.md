@@ -310,6 +310,8 @@ docker system prune -a --volumes
 docker commit robogpt robogpt
 ```
 
+> NOTE: If you run robogpt inside docker you have to run the ngrok command outside docker on the port 8000, the docker will be able to access it via the host network because the port is exposed.
+
 ---
 
 ## Method 2: Manual/Local Installation
