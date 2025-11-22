@@ -47,7 +47,9 @@ Instead of writing complex code, users can simply tell the robot what to do in p
 
 ---
 
-## 🏗️ System Architecture
+## 🏗️ System File Structure
+
+<iframe width="768" height="496" src="https://miro.com/app/live-embed/uXjVJv4qjgc=/?focusWidget=3458764647079759959&embedMode=view_only_without_ui&embedId=593908353470" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
 
 ### Core Components
 
@@ -74,10 +76,13 @@ Instead of writing complex code, users can simply tell the robot what to do in p
 - **Execution Agent**: Manages robot or simulation execution
 - **Context Management**: Maintains conversation and execution history
 - **Error Handling**: Intelligent error recovery and user feedback
-
 ---
 
 ## 🚀 How It Works
+
+### Activity Daigram
+<iframe width="768" height="496" src="https://miro.com/app/live-embed/uXjVJv4qjgc=/?focusWidget=3458764647212162024&embedMode=view_only_without_ui&embedId=742863246374" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
+
 
 ### 1. **Natural Language Input**
 ```
